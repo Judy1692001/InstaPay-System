@@ -21,17 +21,21 @@ public class OTP {
         return code;
     }
 
-    public void sendOTP(int mobileNumber)
+    public void sendOTP(String mobileNumber)
     {
         System.out.println("An OTP: " + getCode() + " has been sent to " + mobileNumber);
     }
 
     public boolean checkOTP()
     {
-        System.out.println("Validate OTP To Continue");
+        System.out.println("Choose (Validate OTP) to continue SignUp process");
+
         Scanner obj = new Scanner(System.in);
         String response = obj.nextLine();
 
-        return (response == "validate");
+        if(response == "Validate OTP")
+            return true;
+
+        return false;
     }
 }

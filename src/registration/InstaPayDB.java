@@ -1,21 +1,28 @@
 package registration;
 
+import java.util.ArrayList;
+
 public class InstaPayDB {
 
-    private User [] systemDB;
+    private ArrayList <User> systemDB = new ArrayList<>();
 
-    public InstaPayDB(User [] systemDB)
+    public InstaPayDB(ArrayList <User> systemDB)
     {
         this.systemDB = systemDB;
     }
 
-    public void setSystemDB(User [] systemDB)
+    public void setSystemDB(ArrayList <User> systemDB)
     {
         this.systemDB = systemDB;
     }
 
-    public User [] getSystemDB()
+    public ArrayList <User> getSystemDB()
     {
         return systemDB;
+    }
+
+    public void addUser(User u)
+    {
+        systemDB.add(u);
     }
 }

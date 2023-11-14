@@ -1,14 +1,21 @@
 package registration;
 
+import dataBase.CIBDataBase;
+import dataBase.DataBase;
+
 public class BankAccountSignUp extends SignUp{
-    public BankAccountSignUp(InstaPayDB obj) {
-        super(obj);
+    public BankAccountSignUp(InstaPayDB systemDataBase) {
+        super(systemDataBase);
     }
 
     @Override
-    public void authenticateUser(User u) {
-        // will choose one of the accounts in account lists of user
-        // then will connect with bank api to check if this account exists in
-        // this bank's db or not
+    public void authenticateUser(User u, Account account) {
+
+
+        if(account.getProviderName() == "CIB")
+        {
+            DataBase db = new CIBDataBase()
+                    db.matchMobileNumber()
+        }
     }
 }

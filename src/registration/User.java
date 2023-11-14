@@ -1,21 +1,26 @@
 package registration;
 
+import billsPayment.Bill;
+
+import java.util.ArrayList;
+
 public class User {
 
     private String name;
-    private int mobileNumber;
+    private String mobileNumber;
     private String userName;
     private String password;
-    private Account [] accounts;
-    //private Bill [] bills;
+    private ArrayList <Account> accounts;
+    private ArrayList <Bill> bills;
 
-    public User(String name, int mobileNumber, String userName, String password, Account [] accounts)
+    public User(String name, String mobileNumber, String userName, String password, ArrayList <Account> accounts, ArrayList <Bill> bills)
     {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.userName = userName;
         this.password = password;
         this.accounts = accounts;
+        this.bills = bills;
     }
 
     public void setName(String name)
@@ -28,12 +33,12 @@ public class User {
         return name;
     }
 
-    public void setMobileNumber(int mobileNumber)
+    public void setMobileNumber(String mobileNumber)
     {
         this.mobileNumber = mobileNumber;
     }
 
-    public int getMobileNumber()
+    public String getMobileNumber()
     {
         return mobileNumber;
     }
@@ -58,25 +63,25 @@ public class User {
         return password;
     }
 
-    public void setAccounts(Account [] accounts)
+    public void setAccounts(ArrayList <Account> accounts)
     {
         this.accounts = accounts;
     }
 
-    public Account [] getAccounts()
+    public ArrayList <Account> getAccounts()
     {
         return accounts;
     }
 
-    /*public void setBills(Bill [] bills)
+    public void setBills(ArrayList <Bill> bills)
     {
         this.bills = bills;
     }
 
-    public Bill [] getBills()
+    public ArrayList <Bill> getBills()
     {
         return bills;
-    }*/
+    }
 
-    //abstract void requestService(Service s);
+    // public void requestService();
 }

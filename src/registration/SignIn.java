@@ -19,20 +19,22 @@ public class SignIn {
         return obj;
     }
 
-    public void SignIn(User u)
+    public void signIn(User u)
     {
-        authenticateUser(u);
+        validateUser(u);
         loadUserProfile(u);
     }
 
-    public boolean authenticateUser(User u)
+    public boolean validateUser(User u)
     {
-        for(int i=0;i<obj.getSystemDB().length;i++)
+        for(User user : obj.getSystemDB())
         {
-            if(obj.getSystemDB()[i].getUserName() == u.getUserName())
+            if(user.getUserName() == u.getUserName())
             {
-                if(obj.getSystemDB()[i].getPassword() == u.getPassword())
+                if(user.getPassword() == u.getPassword())
+                {
                     return true;
+                }
             }
         }
 
@@ -43,16 +45,15 @@ public class SignIn {
 
     public void loadUserProfile(User u)
     {
-        if(authenticateUser(u))
+        if(validateUser(u))
         {
             System.out.println("Welcome back " + u.getUserName());
             System.out.println("Mobile Number: " + u.getMobileNumber());
             System.out.println(u.getUserName() + "'s current accounts:");
 
-            for(int i=0;i<u.getAccounts().length;i++)
+            for(Account account : u.getAccounts())
             {
-                System.out.println(u.getAccounts()[i].getType() + " : " + u.getAccounts()[i].getBalance()
-                + " EGP");
+                System.out.println(account.getProviderName() + account.getBalance() + " EGP");
             }
         }
     }

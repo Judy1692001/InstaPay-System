@@ -2,23 +2,29 @@ package registration;
 
 public class Account {
 
-    //should put bank name
+    private String providerName;
     private String holderName;
-    private int holderMobileNumber;
-    private String type;
+    private String holderMobileNumber;
     private int PIN;
     private double balance;
-    //private Transaction [] transactionHistory;
 
-    //private Service [] linkedServices;
-
-    public Account(String holderName, int holderMobileNumber, String type, int PIN, double balance)
+    public Account(String providerName, String holderName, String holderMobileNumber, int PIN, double balance)
     {
+        this.providerName = providerName;
         this.holderName = holderName;
         this.holderMobileNumber = holderMobileNumber;
-        this.type = type;
         this.PIN = PIN;
         this.balance = balance;
+    }
+
+    public void setProviderName(String providerName)
+    {
+        this.providerName = providerName;
+    }
+
+    public String getProviderName()
+    {
+        return providerName;
     }
 
     public void setHolderName(String holderName)
@@ -31,24 +37,14 @@ public class Account {
         return holderName;
     }
 
-    public void setHolderMobileNumber(int holderMobileNumber)
+    public void setHolderMobileNumber(String holderMobileNumber)
     {
         this.holderMobileNumber = holderMobileNumber;
     }
 
-    public int getHolderMobileNumber()
+    public String getHolderMobileNumber()
     {
         return holderMobileNumber;
-    }
-
-    public void setType(String type)
-    {
-        this.type = type;
-    }
-
-    public String getType()
-    {
-        return type;
     }
 
     public void setPIN(int PIN)
@@ -70,24 +66,4 @@ public class Account {
     {
         return balance;
     }
-
-    /*public void setTransactionHistory(Transaction [] transactionHistory)
-    {
-        this.transactionHistory = transactionHistory;
-    }
-
-    public Transaction [] getTransactionHistory()
-    {
-        return transactionHistory;
-    }
-
-    public void setLinkedServices(Service [] linkedServices)
-    {
-        this.linkedServices = linkedServices;
-    }
-
-    public Service [] getLinkedServices()
-    {
-        return linkedServices;
-    }*/
 }
