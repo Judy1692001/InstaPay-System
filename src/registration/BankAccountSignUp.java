@@ -1,21 +1,40 @@
 package registration;
 
 import dataBase.CIBDataBase;
-import dataBase.DataBase;
+import dataBase.*;
 
-public class BankAccountSignUp extends SignUp{
-    public BankAccountSignUp(InstaPayDB systemDataBase) {
-        super(systemDataBase);
+public class BankAccountSignUp extends SignUp {
+
+    public BankAccountSignUp(InstaPayDB systemDB, DataBase companyDB) {
+        super(systemDB, companyDB);
     }
 
     @Override
-    public void authenticateUser(User u, Account account) {
-
+    public boolean authenticateUser(Account account) {
 
         if(account.getProviderName() == "CIB")
         {
-            DataBase db = new CIBDataBase()
-                    db.matchMobileNumber()
+            for(Account a : getCompanyDB().getDB())
+            {
+                if(a.getHolderMobileNumber() == account.getHolderMobileNumber())
+                    return true;
+            }
+
+            return false;
         }
+        else if(account.getProviderName() == "BanqueMasr")
+        {
+            for(Account a : getCompanyDB().getDB())
+            {
+                if(a.getHolderMobileNumber() == account.getHolderMobileNumber())
+                    return true;
+            }
+
+            return false;
+        }
+
+        System.out.println("Bank not found, please try again");
+
+        return false;
     }
 }

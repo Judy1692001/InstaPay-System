@@ -19,10 +19,10 @@ public class SignIn {
         return obj;
     }
 
-    public void signIn(User u)
+    public void signIn(User u, Account account)
     {
         validateUser(u);
-        loadUserProfile(u);
+        loadUserProfile(u, account);
     }
 
     public boolean validateUser(User u)
@@ -33,6 +33,7 @@ public class SignIn {
             {
                 if(user.getPassword() == u.getPassword())
                 {
+                    System.out.println("Welcome Back " + u.getUserName());
                     return true;
                 }
             }
@@ -43,17 +44,13 @@ public class SignIn {
         return false;
     }
 
-    public void loadUserProfile(User u)
+    public void loadUserProfile(User u, Account account)
     {
         if(validateUser(u))
         {
-            System.out.println("Welcome back " + u.getUserName());
-            System.out.println("Mobile Number: " + u.getMobileNumber());
-            System.out.println(u.getUserName() + "'s current accounts:");
-
-            for(Account account : u.getAccounts())
+            for(Account a : u.getAccounts())
             {
-                System.out.println(account.getProviderName() + account.getBalance() + " EGP");
+                a.printAccountDetails();
             }
         }
     }

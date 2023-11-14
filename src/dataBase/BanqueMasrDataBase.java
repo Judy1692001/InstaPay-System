@@ -1,11 +1,13 @@
 package dataBase;
 
-import dataBase.BankDataBase;
 import registration.Account;
+import registration.WalletAccount;
 
-public class BanqueMasrDataBase extends BankDataBase {
+import java.util.ArrayList;
 
-    public BanqueMasrDataBase(Account[] db) {
-        super(db);
+public class BanqueMasrDataBase extends DataBase {
+
+    public BanqueMasrDataBase(ArrayList<Account> b) {
+        super(b);
     }
 }

@@ -1,101 +1,129 @@
 import dataBase.*;
 import registration.*;
 import wallet.*;
+import billsPayment.*;
+
+import java.util.ArrayList;
 
 
 public class Main {
 
 
     public static void main(String[] args) {
+        //testing registration package
 
-        /*
-        CIB Accounts
-         */
+        //important!! fill in system database
+        /*User u1 = new User("ali", "01098160035", myAccounts);
+        User u2 = new User("amr", "01098160033", myAccounts);
+        User u3 = new User("hoda", "01098160065", myAccounts);
+        User u4 = new User("yara", "01098169035", myAccounts);
+        User u5 = new User("rana", "01098360035", myAccounts);*/
+        // ---------------------------------------------------------------------------------
 
-        Account c1 = new BankAccount("CIB","ali", "01098160035", 100100, 200);
+        // CIB DataBase
+        // Supports Both Accounts!!
 
-        Account c2 = new BankAccount("CIB", "mohamed", "01092358207", 111111, 300);
+        ArrayList <Account> cibDataBase = new ArrayList<>(2);  // cib bank has 2 clients initially
 
-        Account [] cibAccounts = new Account[2];
+        Account cibClient1 = new BankAccount("B1", "CIB", "judy", "01098160035", 109100, 900, "Checking");
+        Account cibClient2 = new WalletAccount("W1", "CIB", "aya", "01096160035", 202200, 900, 80);
 
-        cibAccounts[0] = c1;
-        cibAccounts[1] = c2;
+        cibDataBase.add(cibClient1);
+        cibDataBase.add(cibClient2);
 
-        /*
-        CIB DataBase is now ready
-         */
+        DataBase d1 = new CIBDataBase(cibDataBase);
 
-        DataBase cibDB = new CIBDataBase(cibAccounts);
+        // ---------------------------------------------------------------------------------
 
-        /*
-        Banque Masr Accounts
-         */
+        // BanqueMasr DataBase
+        // Supports Both Accounts!!
 
-        Account b1 = new BankAccount("BanqueMasr", "ali", "01092678854", 199888, 200);
+        ArrayList <Account> banqueMasrDataBase = new ArrayList<>(2);  // banquemasr bank has 2 clients initially
 
-        Account b2 = new BankAccount("BanqueMasr", "yara", "01092234451", 200200, 700);
+        Account banqueMasrClient1 = new BankAccount("B1", "BanqueMasr", "zeina", "01088160035", 109180, 900, "Savings");
+        Account banqueMasrClient2 = new WalletAccount("W1", "BanqueMasr", "rana", "01096160035", 282200, 400, 90);
 
-        Account [] banqueMasrAccounts = new Account[2];
+        banqueMasrDataBase.add(banqueMasrClient1);
+        banqueMasrDataBase.add(banqueMasrClient2);
 
-        banqueMasrAccounts[0] = b1;
-        banqueMasrAccounts[1] = b2;
+        DataBase d2 = new BanqueMasrDataBase(banqueMasrDataBase);
 
-        /*
-        BanqueMasr DataBase is now ready
-         */
+        // ---------------------------------------------------------------------------------
 
-        DataBase banqueMasrDB = new BanqueMasrDataBase(banqueMasrAccounts);
+        // Fawry DataBase
+        // Supports Both Accounts!!
+        // does it support both types?
 
-        /*
-        Vodafone Accounts
-         */
+        ArrayList <Account> fawryDataBase = new ArrayList<>(2);  // fawry has 2 clients initially
 
-        Account v1 = new WalletAccount("Vodafone Cash", "judy", "01098160035", 100100, 900);
+        Account fawryClient1 = new BankAccount("B1", "Fawry", "malak", "01078140035", 109170, 800, "Checking");
+//        Account fawryClient2 = new WalletAccount("W1", "Fawry", "mohamed", "01096060035", 208200, 1600, 96);
 
-        Account v2 = new WalletAccount("Vodafone Cash", "salma", "01092225678", 299899, 300);
+        fawryDataBase.add(fawryClient1);
+//        fawryDataBase.add(fawryClient2);
 
-        Account [] vodafoneCashAccounts = new WalletAccount[2];
+//        DataBase d3 = new VodafoneDataBase(fawryDataBase);  // how to make it accept wallet accounts?
 
-        vodafoneCashAccounts[0] = v1;
-        vodafoneCashAccounts[1] = v2;
+        // ---------------------------------------------------------------------------------
 
-        /*
-        Vodafone DataBase is now ready
-         */
+        // Vodafone DataBase
+        // Supports Only Wallet Accounts!!
 
-        DataBase vodafoneDB = new TeleCommunicationDataBase(vodafoneCashAccounts);
+        ArrayList <WalletAccount> vodafoneDataBase = new ArrayList<>(2);  // vodafone has 2 clients initially
 
-        /*
-        Orange Accounts
-         */
+        WalletAccount vodafoneClient1 = new WalletAccount("W1", "Vodafone", "reem", "01078140035", 109109, 1900, 200);
+        WalletAccount vodafoneClient2 = new WalletAccount("W2", "Vodafone", "jana", "01096166035", 202100, 180, 990);
 
-        Account o1 = new WalletAccount("Orange Cash", "salma", "01095678876", 200300, 600);
+        vodafoneDataBase.add(vodafoneClient1);
+        vodafoneDataBase.add(vodafoneClient2);
 
-        Account o2 = new WalletAccount("Orange Cash", "menna", "01095564378", 900900, 800);
+        DataBase d4= new VodafoneDataBase(vodafoneDataBase);
 
-        Account [] orangeCashAccounts = new WalletAccount[2];
+        // ---------------------------------------------------------------------------------
 
-        orangeCashAccounts[0] = o1;
-        orangeCashAccounts[1] = o2;
+        // Orange DataBase
+        // Supports Only Wallet Accounts!!
 
-        /*
-        Orange DataBase is now ready
-         */
+        ArrayList <WalletAccount> orangeDataBase = new ArrayList<>(2);  // orange has 2 clients initially
 
-        DataBase orangeDB = new OrangeDataBase(orangeCashAccounts);
+        WalletAccount orangeClient1 = new WalletAccount("W1", "Orange", "yara", "01078140095", 109189, 1980, 2980);
+        WalletAccount orangneClient2 = new WalletAccount("W2", "Orange", "amr", "01096160035", 205100, 1880, 90);
 
-        /*
-        Provide each Bank / Company with it's suitable database
-         */
+        orangeDataBase.add(orangeClient1);
+        orangeDataBase.add(orangneClient2);
 
-        Bank cib = new CIB(cibDB);
+//        DataBase d5 = new OrangeDataBase(orangeDataBase);
 
-        Bank banqueMasr = new BanqueMasr(banqueMasrDB);
+        // ---------------------------------------------------------------------------------
 
-        TeleCommunicationCompany vodafone = new Vodafone(vodafoneDB);
+        ArrayList <User> systemDataBase = new ArrayList<>(0);  // new system, no user registered yet
 
-        TeleCommunicationCompany orange = new Orange(orangeDB);
+        InstaPayDB i = new InstaPayDB(systemDataBase);
 
-        ElectronicPaymentCompany fawry = new Fawry(vodafoneDB);
+        SignUp s1 = new BankAccountSignUp(i, d1); // i am the first user testing this system
+
+        ArrayList <Account> myAccounts = new ArrayList<>(2);
+
+        Account a1 = new BankAccount("B1", "CIB", "judy", "01098160035", 100100, 300, "Checking");
+//        Account a2 = new WalletAccount("W1", "Vodafone", "judy", "01098160035", 200200, 500, 150);
+
+        myAccounts.add(a1);
+//        myAccounts.add(a2);
+
+        User u1 = new User("judy", "01098160035", " ", " ", myAccounts);
+
+        s1.register(u1, a1);
+
+        ArrayList <Account> aliAccounts = new ArrayList<>(1);
+
+        Account ali1 = new BankAccount("B1", "CIB", "ali", "01098160037", 100100, 300, "Checking");
+
+        aliAccounts.add(ali1);
+
+        User u2 = new User("ali", "01098160037", "ali123", "a1789", aliAccounts);
+
+        SignIn si = new SignIn(i);
+
+        si.signIn(u1, a1);
     }
 }

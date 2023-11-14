@@ -28,14 +28,14 @@ public class OTP {
 
     public boolean checkOTP()
     {
-        System.out.println("Choose (Validate OTP) to continue SignUp process");
+        System.out.println("Enter OTP you received to continue SignUp process");
 
         Scanner obj = new Scanner(System.in);
         String response = obj.nextLine();
 
-        if(response == "Validate OTP")
+        if(response.equals(getCode()))
             return true;
-
-        return false;
+        else
+            return false;
     }
 }

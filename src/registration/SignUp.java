@@ -1,35 +1,56 @@
 package registration;
 
+import dataBase.CIBDataBase;
+import dataBase.DataBase;
+
 import java.util.Scanner;
 
 public abstract class SignUp {
 
-    private InstaPayDB systemDataBase;
+    private InstaPayDB systemDB;
+    private DataBase companyDB;
 
-    public SignUp(InstaPayDB systemDataBase)
+    public SignUp(InstaPayDB systemDB, DataBase companyDB)
     {
-        this.systemDataBase = systemDataBase;
+        this.systemDB = systemDB;
+        this.companyDB = companyDB;
     }
 
-    public void setSystemDB(InstaPayDB systemDataBase)
+    public void setSystemDB(InstaPayDB systemDB)
     {
-        this.systemDataBase = systemDataBase;
+        this.systemDB = systemDB;
     }
 
     public InstaPayDB getSystemDB()
     {
-        return systemDataBase;
+        return systemDB;
+    }
+
+    public void setCompanyDB(DataBase companyDB)
+    {
+        this.companyDB = companyDB;
+    }
+
+    public DataBase getCompanyDB()
+    {
+        return companyDB;
     }
 
     public final void register(User u, Account account)
     {
-        authenticateUser (u);  //search database of bank or wallet
-        sendAndVerifyOTP (u);
-        enterUsername (u);
-        enterPassword (u);
+        authenticateUser (account);
+
+        if(authenticateUser(account))
+        {
+            sendAndVerifyOTP (u);
+            enterUsername (u);
+            enterPassword (u);
+        }
+        else
+            System.out.println("Please try again");
     }
 
-    public abstract void authenticateUser (User u, Account account);
+    public abstract boolean authenticateUser (Account account);
 
     public void sendAndVerifyOTP (User u)
     {
@@ -45,20 +66,15 @@ public abstract class SignUp {
             System.out.println("OTP verified");
         else
             sendAndVerifyOTP(u);
-        //if user entered the mobile number connected to either bank account or wallet
-        // then approve
-        // else decline
     }
 
     public void enterUsername (User u)
     {
         System.out.println("Username: ");
-        Scanner o = new Scanner((System.in));  // "ali" "ahmed" "yara"
+        Scanner o = new Scanner((System.in));
         String userName = o.nextLine();
 
-        for(int i=0;i<systemDataBase.getSystemDB().size();i++)
-        {
-            for(User user : systemDataBase.getSystemDB())
+            for(User user : systemDB.getSystemDB())
             {
                 if(user.getUserName() == userName)
                 {
@@ -67,7 +83,6 @@ public abstract class SignUp {
                     enterUsername(u);
                 }
             }
-        }
 
         u.setUserName(userName);
 
@@ -84,6 +99,8 @@ public abstract class SignUp {
 
         System.out.println("Password set Successfully");
 
-        systemDataBase.addUser(u);
+        System.out.println(("You are now an InstaPay member"));
+
+        systemDB.addUser(u);
     }
 }
