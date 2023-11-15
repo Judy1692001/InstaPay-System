@@ -6,8 +6,6 @@ public class WalletAccountSignUp extends SignUp{
     public WalletAccountSignUp(InstaPayDB systemDB, DataBase companyDB) {
         super(systemDB, companyDB);
     }
-    //wallet attributes must differ from bank attributes
-    //violates ocp
 
     @Override
     public boolean authenticateUser(Account account) {

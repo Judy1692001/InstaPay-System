@@ -5,7 +5,7 @@ import registration.WalletAccount;
 
 import java.util.ArrayList;
 
-public class CIBDataBase extends DataBase {
+public class CIBDataBase extends BankDataBase {
 
     public CIBDataBase(ArrayList<Account> b) {
         super(b);

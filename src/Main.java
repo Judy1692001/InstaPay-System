@@ -1,3 +1,7 @@
+import balanceInquiry.BankAccountInquiry;
+import balanceInquiry.Inquiry;
+import balanceTransfer.TransferToBankAccount;
+import balanceTransfer.Transference;
 import dataBase.*;
 import registration.*;
 import wallet.*;
@@ -131,6 +135,79 @@ public class Main {
 
         si.signIn(u1, a1);*/
 
+        ArrayList <Account> vodafoneDataBase = new ArrayList<>(2);  // vodafone has 2 clients initially
+
+        WalletAccount vodafoneClient1 = new WalletAccount("W1", "Vodafone", "reem", "01078140035", 109109, 1900, 200);
+        WalletAccount vodafoneClient2 = new WalletAccount("W2", "Vodafone", "jana", "01096166035", 202100, 180, 990);
+
+        vodafoneDataBase.add(vodafoneClient1);
+        vodafoneDataBase.add(vodafoneClient2);
+
+        DataBase d4= new VodafoneDataBase(vodafoneDataBase);
+
+        WalletProvider vodafone = new Vodafone(d4);
+
+        DigitalWallet v = new VodafoneCash(); // should take name of process as a parameter
+
+        vodafone.createDigitalWallet(v);  // inside create digital wallet access d to implement transaction method
+
+        ArrayList <User> systemDataBase = new ArrayList<>(1);  // new system, no user registered yet
+
+        ArrayList <Account> aliAccounts = new ArrayList<>(1);
+
+        Account ali1 = new BankAccount("B1", "CIB", "ali", "01098160037", 100100, 300, "Checking");
+
+        aliAccounts.add(ali1);
+
+        ArrayList <Bill> b = new ArrayList<>();
+
+        b.add(new GasBill( 123.55, 1111, 1000,"pepsi adv"));
+
+        User u = new User("ali", "01098160037", "ali123", "a1789", aliAccounts, b);
+
+        systemDataBase.add(u);
+
+        InstaPayDB i = new InstaPayDB(systemDataBase);
+
+        Transference t = new TransferToBankAccount(i);
+
+        Account ali2 = new BankAccount("B7", "CIB", "ali2", "01098960037", 100108, 3990, "Checking");
+
+        t.transferMoney(ali1, ali2, 200);
+
+        System.out.println("*******************");
+
+        Inquiry inquiry = new BankAccountInquiry();
+
+        inquiry.inquireAboutBalance(ali2);
+
+        System.out.println("*******************");
+
+        Bill bill = new GasBill(200, 140, 500, "adv");
+
+        Payment p = new BankPayment();
+
+        p.payBills(u, bill);
+
+        System.out.println("*******************");
+
+        SignUp s1 = new BankAccountSignUp(i, d4);
+
+        ArrayList <Account> myAccounts = new ArrayList<>(2);
+
+        Account a1 = new BankAccount("B1", "CIB", "judy", "01098160035", 100100, 300, "Checking");
+        Account a2 = new WalletAccount("W1", "Vodafone", "judy", "01098160035", 200200, 500,150);
+
+        myAccounts.add(a1);
+        myAccounts.add(a2);
+
+        s1.register(u, ali1);
+
+        System.out.println("*******************");
+
+        SignIn si1 = new SignIn(i);
+
+        si1.signIn(u, ali1);
 
 
 
@@ -138,6 +215,12 @@ public class Main {
 
 
 
+
+
+
+
+
+/*
 
 
         ArrayList<Account> basicAcc=new ArrayList<>();
@@ -214,10 +297,6 @@ public class Main {
                 }
             }
 
-        }
-
-
-
-
+        }*/
     }
 }

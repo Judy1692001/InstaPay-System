@@ -81,6 +81,4 @@ public class User {
     {
         return bills;
     }
-
-    // public void requestService();
 }

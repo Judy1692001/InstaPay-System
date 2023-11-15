@@ -11,5 +11,6 @@ public class BanqueMasr extends Bank {
     @Override
     public void createDigitalWallet(DigitalWallet dw) {
 
+        dw.Service();
     }
 }

@@ -10,6 +10,6 @@ public class CIB extends Bank {
 
     @Override
     public void createDigitalWallet(DigitalWallet dw) {
-
+        dw.Service();
     }
 }

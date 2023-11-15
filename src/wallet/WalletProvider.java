@@ -1,6 +1,7 @@
 package wallet;
 
 import dataBase.DataBase;
+import registration.*;
 
 public abstract class WalletProvider {
 

@@ -18,6 +18,6 @@ public class WalletPayment implements Payment {
             }
         }
 
-        System.out.println("there is no enought money to pay this bill");
+        System.out.println("there is no enough money to pay this bill");
     }
 }

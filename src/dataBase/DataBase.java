@@ -27,7 +27,7 @@ public abstract class DataBase {
     {
         for(Account a : getDB())
         {
-            if(a.getHolderMobileNumber() == holderMobileNumber)
+            if(a.getHolderMobileNumber().equals(holderMobileNumber))
                 return true;
         }
 

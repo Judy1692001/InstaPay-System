@@ -20,12 +20,12 @@ public class SignIn {
         return obj;
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public void signIn(User u, Account account)

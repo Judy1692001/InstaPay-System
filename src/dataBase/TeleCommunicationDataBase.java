@@ -5,7 +5,7 @@ import registration.WalletAccount;
 
 import java.util.ArrayList;
 
-public class TeleCommunicationDataBase extends DataBase{
+public abstract class TeleCommunicationDataBase extends DataBase{
 
     public TeleCommunicationDataBase(ArrayList<Account> db) {
         super(db);

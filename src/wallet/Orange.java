@@ -9,6 +9,6 @@ public class Orange extends TeleCommunicationCompany {
 
     @Override
     public void createDigitalWallet(DigitalWallet dw) {
-
+        dw.Service();
     }
 }
