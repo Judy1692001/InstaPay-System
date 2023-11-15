@@ -5,5 +5,5 @@ import registration.User;
 
 public interface Inquiry {
 
-    public void inquireAboutBalance(User u, Account a);
+    public void inquireAboutBalance(Account a);
 }
