@@ -11,16 +11,16 @@ public class User {
     private String userName;  // how can he have a username and password before signing up??
     private String password;
     private ArrayList <Account> accounts;
-//    private ArrayList <Bill> bills;  // he might not have bills to pay already
+    private ArrayList <Bill> bills;  // he might not have bills to pay already
 
-    public User(String name, String mobileNumber, String userName, String password, ArrayList <Account> accounts /*ArrayList <Bill> bills*/)
+    public User(String name, String mobileNumber, String userName, String password, ArrayList <Account> accounts, ArrayList <Bill> bills)
     {
         this.name = name;
         this.mobileNumber = mobileNumber;
         this.userName = userName;
         this.password = password;
         this.accounts = accounts;
-//        this.bills = bills;
+        this.bills = bills;
     }
 
     public void setName(String name)
@@ -72,7 +72,7 @@ public class User {
         return accounts;
     }
 
-    /*public void setBills(ArrayList <Bill> bills)
+    public void setBills(ArrayList <Bill> bills)
     {
         this.bills = bills;
     }
@@ -80,7 +80,7 @@ public class User {
     public ArrayList <Bill> getBills()
     {
         return bills;
-    }*/
+    }
 
     // public void requestService();
 }

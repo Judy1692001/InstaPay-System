@@ -21,7 +21,6 @@ public class WalletAccount extends Account{
 
     @Override
     public void printAccountDetails() {
-        System.out.println("Loading your profile now..");
         System.out.println("ID: " + getID());
         System.out.println("Provider's Name: " + getProviderName());
         System.out.println("Name: " + getHolderName());

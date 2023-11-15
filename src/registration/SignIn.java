@@ -3,6 +3,7 @@ package registration;
 public class SignIn {
 
     private InstaPayDB obj;
+    private User user;
 
     public SignIn(InstaPayDB obj)
     {
@@ -19,21 +20,29 @@ public class SignIn {
         return obj;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public void signIn(User u, Account account)
     {
         validateUser(u);
-        loadUserProfile(u, account);
+        loadUserProfile(user);
     }
 
     public boolean validateUser(User u)
     {
-        for(User user : obj.getSystemDB())
+        for(int i=0;i<= obj.getSystemDB().size();i++)
         {
-            if(user.getUserName() == u.getUserName())
+            user= obj.getSystemDB().get(i);
+            if(user.getUserName().equals(u.getUserName()))
             {
-                if(user.getPassword() == u.getPassword())
+                if(user.getPassword().equals(u.getPassword()))
                 {
-                    System.out.println("Welcome Back " + u.getUserName());
                     return true;
                 }
             }
@@ -44,13 +53,14 @@ public class SignIn {
         return false;
     }
 
-    public void loadUserProfile(User u, Account account)
+    public void loadUserProfile(User u)
     {
         if(validateUser(u))
         {
-            for(Account a : u.getAccounts())
+            for(Account account : u.getAccounts())
             {
-                a.printAccountDetails();
+                account.printAccountDetails();
+                System.out.println("******************************************");
             }
         }
     }

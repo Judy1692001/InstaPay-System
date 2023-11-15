@@ -4,20 +4,21 @@ import wallet.*;
 import billsPayment.*;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Main {
 
 
     public static void main(String[] args) {
-        //testing registration package
+       /* //testing registration package
 
         //important!! fill in system database
-        /*User u1 = new User("ali", "01098160035", myAccounts);
+        *//*User u1 = new User("ali", "01098160035", myAccounts);
         User u2 = new User("amr", "01098160033", myAccounts);
         User u3 = new User("hoda", "01098160065", myAccounts);
         User u4 = new User("yara", "01098169035", myAccounts);
-        User u5 = new User("rana", "01098360035", myAccounts);*/
+        User u5 = new User("rana", "01098360035", myAccounts);*//*
         // ---------------------------------------------------------------------------------
 
         // CIB DataBase
@@ -69,7 +70,7 @@ public class Main {
         // Vodafone DataBase
         // Supports Only Wallet Accounts!!
 
-        ArrayList <WalletAccount> vodafoneDataBase = new ArrayList<>(2);  // vodafone has 2 clients initially
+        ArrayList <Account> vodafoneDataBase = new ArrayList<>(2);  // vodafone has 2 clients initially
 
         WalletAccount vodafoneClient1 = new WalletAccount("W1", "Vodafone", "reem", "01078140035", 109109, 1900, 200);
         WalletAccount vodafoneClient2 = new WalletAccount("W2", "Vodafone", "jana", "01096166035", 202100, 180, 990);
@@ -84,7 +85,7 @@ public class Main {
         // Orange DataBase
         // Supports Only Wallet Accounts!!
 
-        ArrayList <WalletAccount> orangeDataBase = new ArrayList<>(2);  // orange has 2 clients initially
+        ArrayList <Account> orangeDataBase = new ArrayList<>(2);  // orange has 2 clients initially
 
         WalletAccount orangeClient1 = new WalletAccount("W1", "Orange", "yara", "01078140095", 109189, 1980, 2980);
         WalletAccount orangneClient2 = new WalletAccount("W2", "Orange", "amr", "01096160035", 205100, 1880, 90);
@@ -92,7 +93,7 @@ public class Main {
         orangeDataBase.add(orangeClient1);
         orangeDataBase.add(orangneClient2);
 
-//        DataBase d5 = new OrangeDataBase(orangeDataBase);
+        DataBase d5 = new OrangeDataBase(orangeDataBase);
 
         // ---------------------------------------------------------------------------------
 
@@ -105,16 +106,20 @@ public class Main {
         ArrayList <Account> myAccounts = new ArrayList<>(2);
 
         Account a1 = new BankAccount("B1", "CIB", "judy", "01098160035", 100100, 300, "Checking");
-//        Account a2 = new WalletAccount("W1", "Vodafone", "judy", "01098160035", 200200, 500, 150);
+        Account a2 = new WalletAccount("W1", "Vodafone", "judy", "01098160035", 200200, 500,150);
 
-        myAccounts.add(a1);
-//        myAccounts.add(a2);
+          myAccounts.add(a1);
+        myAccounts.add(a2);
 
         User u1 = new User("judy", "01098160035", " ", " ", myAccounts);
 
         s1.register(u1, a1);
 
-        ArrayList <Account> aliAccounts = new ArrayList<>(1);
+        SignIn si1 = new SignIn(i);
+
+        si1.signIn(u1, a2);
+
+        *//*ArrayList <Account> aliAccounts = new ArrayList<>(1);
 
         Account ali1 = new BankAccount("B1", "CIB", "ali", "01098160037", 100100, 300, "Checking");
 
@@ -124,6 +129,95 @@ public class Main {
 
         SignIn si = new SignIn(i);
 
-        si.signIn(u1, a1);
+        si.signIn(u1, a1);*/
+
+
+
+
+
+
+
+
+
+
+        ArrayList<Account> basicAcc=new ArrayList<>();
+        basicAcc.add(new BankAccount("Ahmed Ali","01234","typeee",453,1000));
+
+        ArrayList<Bill> b=new ArrayList<>();
+        b.add(new GasBill( 123.55, 1111, 1000,"pepsi adv"));
+
+        ArrayList<User> intializeDB= new ArrayList<>();
+        intializeDB.add(new User("Ahmed Ali","01234","ahmed123","12##",basicAcc,b));
+
+        InstaPayDB data=new InstaPayDB(intializeDB);
+
+        System.out.println("to create new account enter 1, to sign in enter 2");
+        Scanner scanner = new Scanner(System.in);
+        int userInput = scanner.nextInt();
+
+        if(userInput==1)
+        {
+            System.out.println("to create Bank account enter 1, to create wallet account enter 2");
+            userInput = scanner.nextInt();
+
+            if(userInput==1)
+            {
+                SignUp newUser=new BankAccountSignUp(data);
+//                newUser.register(null);
+            }
+
+            else if(userInput==2){
+                SignUp newUser=new WalletAccountSignUp(data);
+//                newUser.register(null);
+            }
+
+        }
+
+        else if(userInput==2){
+            System.out.print("enter your username: ");
+            String um = scanner.next();
+            System.out.print("enter your password: ");
+            String pw = scanner.next();
+
+//            System.out.println(um);
+//            System.out.println(pw);
+
+            User X=new User("","",um,pw,new ArrayList<>(),new ArrayList<>());
+            SignIn ss=new SignIn(data);
+            ss.signIn(X);
+
+            System.out.println("Available services: press (1) for pay bills, (2) for transfer money ");
+            int choice = scanner.nextInt();
+
+            if(choice==1){
+                System.out.println("Your bills are: ");
+                for(int i=0;i<ss.getUser().getBills().size();i++){
+                    ss.getUser().getBills().get(i).displayContent();
+
+                    System.out.println("choose bill to pay: ");
+                    int choiceBill = scanner.nextInt();
+
+                    System.out.println("press 1 to pay by bank account or 2 to pay by wallet");
+                    int choicemethod = scanner.nextInt();
+
+                    if(choicemethod==1){
+                        Payment p=new BankPayment();
+                        p.payBills(ss.getUser(),  ss.getUser().getBills().get(choiceBill-1));
+                    }
+
+                    else if(choicemethod==2){
+                        Payment p=new WalletPayment();
+                        p.payBills(ss.getUser(),  ss.getUser().getBills().get(choiceBill-1));
+
+                    }
+
+                }
+            }
+
+        }
+
+
+
+
     }
 }
